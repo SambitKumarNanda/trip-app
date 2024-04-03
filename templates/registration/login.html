@@ -1,0 +1,29 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/output.css' %}">
+
+
+{% if form.errors %}
+<p>You have entered incorrect username or password</p>
+{% endif %} {% if next %} {% if not user.is_authenticated %}
+<h1>Please login to view the page</h1>
+{% else %}
+<h1>Please Login</h1>
+{% endif %} {% endif %}
+
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+    <h1 class="text-3xl font-bold mb-6 text-center">Login</h1>
+    <form action="{% url 'login' %}" method="POST" class="space-y-4">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" class="w-full border border-gray-300 rounded-md py-3 px-4 focus:outline-none focus:border-blue-500">
+      
+      <input type="password" name="password" placeholder="Password" class="w-full border border-gray-300 rounded-md py-3 px-4 focus:outline-none focus:border-blue-500">
+      
+      <button type="submit" class="w-full bg-blue-500 text-white rounded-md py-3 px-4 hover:bg-blue-600 transition duration-300 ease-in-out">Login</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+  </div>
+</div>
+

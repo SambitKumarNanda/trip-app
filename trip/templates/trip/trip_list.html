@@ -1,0 +1,29 @@
+{% extends 'trip/_base.html' %}
+{% load static %}
+{% if user.is_authenticated %}
+{% block content %}
+<h2 class="text-2xl font-semibold mb-4 uppercase">My Trips</h2>
+<button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-4">
+    <a href="{% url 'trip-create' %}">Add new trip</a>
+</button>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for trip in trips %}
+        <a href="{% url 'trip-detail' trip.id %}">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-4">
+                <div class="relative">
+                    <img src="{{ trip.trip_img.url }}" alt="Trip Image" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 left-0 bg-blue-500 text-white px-4 py-2">
+                        <h3 class="font-semibold">{{ trip.country }}</h3>
+                        <p>{{ trip.city }}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{% endblock content %}
+{% else %}
+<script>
+     window.location.href = {% url 'login' %}
+</script>
+{% endif %}

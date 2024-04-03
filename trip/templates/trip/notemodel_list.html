@@ -1,0 +1,41 @@
+{% extends 'trip/_base.html' %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+ <h2 class="text-2xl font-semibold mb-4 uppercase">My Notes</h2>
+<button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-4">
+    <a href="{% url 'note-create-view' %}">Add new Note</a>
+</button>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {% for note in object_list %}
+                <div class="bg-blue-200 shadow-md rounded-lg overflow-hidden">
+                <a href="{% url 'note-detail' note.id %}">
+                    <div class="p-4 border-b border-blue-300">
+                        <h2 class="text-lg font-semibold text-blue-800">{{ note.name }}</h2>
+                        <h3 class="text-base font-normal text-blue-600">{{ note.trip.city }}, {{ note.trip.country }}</h3>
+                    </div>
+                    <img src="{{ note.img.url }}" alt="Image" class="w-full h-40 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-600">{{ note.description }}</p>
+                    </div>
+                    <div class="p-4 border-t border-blue-300 flex items-center justify-between">
+                        <span class="text-sm text-blue-600">{{ note.rating }} / 5</span>
+                        <span class="text-blue-500 hover:text-blue-700 uppercase">{{ note.type }}</span>
+                        <div>
+                            <button class="text-blue-500 hover:text-blue-700 mr-2">
+                                <a href="{% url 'note-update' note.id %}">Edit</a>
+                            </button>
+                            <button class="text-blue-500 hover:text-blue-700">
+                                <form action="{% url 'note-delete' note.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Delete">
+                                </form>
+                            </button>
+                        </div>
+                    </div>
+                </a>
+                </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

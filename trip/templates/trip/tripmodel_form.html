@@ -1,0 +1,32 @@
+{% extends 'trip/_base.html' %}
+{% block content %}
+<div class="max-w-lg mx-auto">
+    <h2 class="text-2xl font-semibold text-white mb-8">Trip Form</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-6">
+            <label for="city" class="block text-white text-sm font-semibold mb-2">City</label>
+            <input type="text" name="city" id="city" class="form-input mt-1 block w-full px-4 py-2 rounded-md bg-gray-900 text-gray-100 focus:outline-none focus:bg-gray-700" required>
+        </div>
+        <div class="mb-6">
+            <label for="country" class="block text-white text-sm font-semibold mb-2">Country</label>
+            <input type="text" name="country" id="country" class="form-input mt-1 block w-full px-4 py-2 rounded-md bg-gray-900 text-gray-100 focus:outline-none focus:bg-gray-700" required>
+        </div>
+        <div class="mb-6">
+            <label for="start_date" class="block text-white text-sm font-semibold mb-2">Start Date</label>
+            <input type="date" name="start_date" id="start_date" class="form-input mt-1 block w-full px-4 py-2 rounded-md bg-gray-900 text-gray-100 focus:outline-none focus:bg-gray-700" required>
+        </div>
+        <div class="mb-6">
+            <label for="end_date" class="block text-white text-sm font-semibold mb-2">End Date</label>
+            <input type="date" name="end_date" id="end_date" class="form-input mt-1 block w-full px-4 py-2 rounded-md bg-gray-900 text-gray-100 focus:outline-none focus:bg-gray-700" required>
+        </div>
+        <div class="mb-6">
+            <label for="trip_img" class="block text-white text-sm font-semibold mb-2">Trip Image</label>
+            <input type="file" name="trip_img" id="trip_img" class="form-input mt-1 block w-full px-4 py-2 rounded-md bg-gray-900 text-gray-100 focus:outline-none focus:bg-gray-700" required>
+        </div>
+        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"></input>
+    </form>
+</div>
+
+
+{% endblock content %}
